@@ -1,17 +1,22 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Persona OS - Operations Dashboard</title><style>*{margin:0}html,body{height:100%}</style></head><body><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Persona OS - Operations Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,600&family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet"><style>*{margin:0}html,body{height:100%}</style></head><body><style>
   :root{
-    --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#FBFAF6;
-    --ink:#16211E; --ink-2:#47534F; --muted:#7E8883; --line:#E7E1D8;
-    --brand:#0E5B54; --brand-d:#0A423D; --brand-l:#E4EFED;
-    --accent:#BC5A2C; --accent-l:#F7ECE3;
-    --sb:#10302C; --sb2:#0C2521; --sb-ink:#BFCEC9; --sb-active:#17463F; --sb-line:#1E413B;
+    /* Persona OS brand palette — Studio Navy / Circuit Blue / Node Highlight / Mist / Ink */
+    --bg:#EEF2F8; --surface:#FFFFFF; --surface-2:#F6F8FC;              /* Mist surfaces */
+    --ink:#1A2438; --ink-2:#41506B; --muted:#7C8AA5; --line:#E1E7F1;
+    --brand:#0E66E7; --brand-d:#0A4FBF; --brand-l:#E4EDFC;            /* Node Highlight — primary CTA / active / links */
+    --accent:#2C65BA; --accent-l:#E7EEF8;                            /* Circuit Blue — secondary accents / rules */
+    --navy:#0C1E40; --navy-d:#081530;                                /* Studio Navy — structural / hero */
+    --sb:#0C1E40; --sb2:#081530; --sb-ink:#AEBCD8; --sb-active:#13294F; --sb-line:#1C2E52;
     --ok:#1F7A54; --ok-l:#E4F1EB; --warn:#B0730F; --warn-l:#FAEFD8;
     --danger:#B42318; --danger-l:#FBE8E6; --flag:#C4600A; --flag-l:#FBEEDC;
-    --info:#245C97; --info-l:#E6EEF7;
-    --r:10px; --r-sm:7px; --shadow:0 1px 2px rgba(20,30,28,.05),0 4px 16px rgba(20,30,28,.05);
-    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    --info:#2C65BA; --info-l:#E7EEF8;
+    --r:10px; --r-sm:7px; --shadow:0 1px 2px rgba(12,30,64,.05),0 4px 16px rgba(12,30,64,.06);
+    --sans:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    --display:'Fraunces',Georgia,'Times New Roman',serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   }
+  /* Fraunces display for hero lines & section titles (brand typography) */
+  h1,h2,h3,.pagetitle{font-family:var(--display);font-optical-sizing:auto}
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--ink);
     font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
@@ -24,15 +29,15 @@
 
   /* ============ LOGIN ============ */
   #login{position:fixed;inset:0;z-index:100;display:grid;grid-template-columns:1.1fr .9fr;background:var(--bg)}
-  #login .brandside{background:linear-gradient(150deg,#0C2521,#12403A 60%,#0E5B54);color:#EAF2F0;
+  #login .brandside{background:linear-gradient(150deg,#081530,#0C1E40 55%,#123572);color:#EAF0FB;
     padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
   #login .brandside::after{content:"";position:absolute;right:-120px;bottom:-120px;width:420px;height:420px;
-    border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(188,90,44,.35),transparent 70%)}
+    border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(14,102,231,.32),transparent 70%)}
   .logo{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em}
-  .logo .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0E5B54,#BC5A2C);
+  .logo .mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#0C1E40,#0E66E7);
     display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px}
   #login .brandside h1{font-size:34px;font-weight:700;line-height:1.15;letter-spacing:-.02em;max-width:15ch;margin-top:24px}
-  #login .brandside p{color:#B7C9C4;margin-top:16px;max-width:40ch}
+  #login .brandside p{color:#AEBCD8;margin-top:16px;max-width:40ch}
   .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
   .miniflag{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#CFE0DC;
     border:1px solid rgba(255,255,255,.16);padding:5px 10px;border-radius:20px;background:rgba(255,255,255,.05)}
@@ -55,19 +60,19 @@
   .sidebar .top{padding:18px 18px 14px;border-bottom:1px solid var(--sb-line)}
   .sidebar .logo{color:#fff;font-size:15px}
   .navgroup{padding:12px 10px}
-  .navlabel{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6F857F;padding:8px 12px 6px}
+  .navlabel{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6E7DA6;padding:8px 12px 6px}
   .navitem{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:8px;color:var(--sb-ink);
     font-size:13.5px;font-weight:500;border:none;background:none;width:100%;text-align:left;position:relative}
   .navitem svg{width:18px;height:18px;flex:none;opacity:.85}
   .navitem:hover{background:var(--sb2);color:#fff}
   .navitem.active{background:var(--sb-active);color:#fff;font-weight:600}
   .navitem.active::before{content:"";position:absolute;left:-10px;top:8px;bottom:8px;width:3px;
-    background:var(--accent);border-radius:0 3px 3px 0}
+    background:var(--brand);border-radius:0 3px 3px 0}
   .navitem .count{margin-left:auto;font-size:11px;font-weight:700;background:var(--accent);color:#fff;
     padding:1px 7px;border-radius:10px;font-variant-numeric:tabular-nums}
   .navitem .count.crit{background:var(--danger)}
-  .sidebar .foot{margin-top:auto;padding:14px;border-top:1px solid var(--sb-line);font-size:11.5px;color:#6F857F}
-  .residency{display:flex;align-items:center;gap:7px;color:#8FA69F}
+  .sidebar .foot{margin-top:auto;padding:14px;border-top:1px solid var(--sb-line);font-size:11.5px;color:#6E7DA6}
+  .residency{display:flex;align-items:center;gap:7px;color:#8B9AC0}
   .residency .dot{width:7px;height:7px;border-radius:50%;background:#3FBF8F;box-shadow:0 0 0 3px rgba(63,191,143,.2)}
 
   /* main column */
@@ -93,7 +98,7 @@
   .iconbtn .dot{position:absolute;top:-4px;right:-4px;background:var(--danger);color:#fff;font-size:10px;
     font-weight:700;min-width:17px;height:17px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
   .userchip{display:flex;align-items:center;gap:9px}
-  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0E5B54,#BC5A2C);
+  .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0C1E40,#0E66E7);
     color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
   .userchip .nm{font-size:13px;font-weight:600;line-height:1.2}
   .userchip .rl{font-size:11px;color:var(--muted)}
@@ -141,7 +146,7 @@
   .cchip.pend{color:var(--warn);background:var(--warn-l)}
 
   .aibadge{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-    background:rgba(16,48,44,.82);color:#fff;padding:3px 6px;border-radius:5px;backdrop-filter:blur(2px)}
+    background:rgba(12,30,64,.85);color:#fff;padding:3px 6px;border-radius:5px;backdrop-filter:blur(2px)}
 
   table{width:100%;border-collapse:collapse}
   .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
@@ -175,9 +180,9 @@
   /* bar chart */
   .bars{display:flex;align-items:flex-end;gap:10px;height:120px;padding-top:8px}
   .bars .b{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;justify-content:flex-end;height:100%}
-  .bars .b .bar{width:100%;max-width:34px;background:linear-gradient(180deg,var(--brand),#2C7C74);border-radius:5px 5px 0 0}
+  .bars .b .bar{width:100%;max-width:34px;background:linear-gradient(180deg,var(--brand),#5B93F0);border-radius:5px 5px 0 0}
   .bars .b .bl{font-size:10.5px;color:var(--muted)}
-  .bars .b.hi .bar{background:linear-gradient(180deg,var(--accent),#D07A4E)}
+  .bars .b.hi .bar{background:linear-gradient(180deg,var(--accent),#6C9BD6)}
 
   .feed{display:flex;flex-direction:column}
   .feeditem{display:flex;gap:11px;padding:11px 0;border-bottom:1px dashed var(--line)}
@@ -217,7 +222,7 @@
   .convo{display:flex;flex-direction:column;gap:12px}
   .bubble{max-width:82%;padding:11px 14px;border-radius:12px;font-size:13.5px}
   .bubble.u{align-self:flex-start;background:var(--surface-2);border:1px solid var(--line);border-bottom-left-radius:3px}
-  .bubble.a{align-self:flex-end;background:var(--brand-l);border:1px solid #CFE3DF;border-bottom-right-radius:3px}
+  .bubble.a{align-self:flex-end;background:var(--brand-l);border:1px solid #CBDBF6;border-bottom-right-radius:3px}
   .bubble .who{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}
   .prismbox{display:flex;flex-direction:column;gap:8px}
   .vrow{display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font-size:12.5px}
@@ -231,7 +236,7 @@
   .verts{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
   .vert{border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:12px;display:flex;align-items:center;gap:8px}
   .vert .n{margin-left:auto;font-weight:700;color:var(--muted);font-size:11px}
-  .vert.act{border-color:#CFE3DF;background:var(--brand-l)}
+  .vert.act{border-color:#CBDBF6;background:var(--brand-l)}
 
   .thresh{display:flex;flex-direction:column;gap:14px}
   .band{display:flex;align-items:center;gap:14px;padding:13px 15px;border-radius:var(--r);border:1px solid var(--line)}
@@ -239,8 +244,55 @@
   .band h4{font-size:13.5px}.band p{font-size:12px;color:var(--muted);margin-top:2px}
   .band .rng{margin-left:auto;font-family:var(--mono);font-weight:700;font-size:15px}
 
+  /* website guided-flow preview */
+  .chatprev{border:1px solid var(--line);border-radius:14px;background:var(--surface-2);overflow:hidden;max-width:420px}
+  .chatprev .cp-h{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--navy);color:#fff}
+  .chatprev .cp-h .cp-av{width:30px;height:30px;border-radius:8px;overflow:hidden;flex:none;background:#13294F}
+  .chatprev .cp-h .cp-nm{font-size:13px;font-weight:700;line-height:1.1}
+  .chatprev .cp-h .cp-sub{font-size:10.5px;color:var(--sb-ink)}
+  .chatprev .cp-h .cp-ai{margin-left:8px;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:3px 7px;border-radius:20px}
+  .chatprev .cp-h .cp-restart{margin-left:auto;width:26px;height:26px;border-radius:7px;border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.08);color:#fff;display:inline-grid;place-items:center;cursor:pointer;transition:.15s}
+  .chatprev .cp-h .cp-restart:hover{background:rgba(255,255,255,.18)}
+  .chatprev .cp-h .cp-restart svg{width:14px;height:14px}
+  .chatprev .cp-body{padding:14px;display:flex;flex-direction:column;gap:11px}
+  .cp-scroll{padding:14px;display:flex;flex-direction:column;gap:10px;height:320px;overflow-y:auto;scroll-behavior:smooth}
+  .cp-input{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:#fff}
+  .cp-input input{flex:1;border:1px solid var(--line);border-radius:20px;padding:9px 14px;font:inherit;font-size:13px}
+  .cp-input input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-l)}
+  .cp-send{width:38px;height:38px;flex:none;border:none;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;cursor:pointer;transition:.15s}
+  .cp-send:hover{background:var(--brand-d)}
+  .cp-send svg{width:16px;height:16px}
+  .cp-typing{align-self:flex-start;display:inline-flex;gap:4px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;border-bottom-left-radius:3px}
+  .cp-typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:cpblink 1.2s infinite}
+  .cp-typing i:nth-child(2){animation-delay:.2s}.cp-typing i:nth-child(3){animation-delay:.4s}
+  @keyframes cpblink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+  .cp-note{align-self:flex-start;max-width:92%;font-size:10.5px;color:var(--muted);display:flex;align-items:center;gap:5px;
+    background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:6px 9px}
+  .cp-note svg{width:12px;height:12px;flex:none}
+  .cp-note.gate{color:var(--warn);border-color:#EAD3B4;background:var(--warn-l)}
+  @media(prefers-reduced-motion:reduce){.cp-scroll{scroll-behavior:auto}.cp-typing i{animation:none}}
+  .optchips{display:flex;flex-wrap:wrap;gap:7px}
+  .optchip{font-size:12px;font-weight:600;color:var(--brand);background:#fff;border:1px solid #CBDBF6;
+    border-radius:20px;padding:7px 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:.15s}
+  .optchip:hover{background:var(--brand-l)}
+  .optchip svg{width:12px;height:12px}
+  .cp-foot{border-top:1px solid var(--line);padding:9px 12px;background:#fff;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .cp-foot svg{width:12px;height:12px;color:var(--muted);flex:none}
+  .libcap{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--ok);
+    background:var(--ok-l);border-radius:20px;padding:5px 11px}
+  .libcap svg{width:13px;height:13px}
+  .rowacts{display:flex;gap:6px;justify-content:flex-end}
+  .iconbtn{width:28px;height:28px;border-radius:7px;border:1px solid var(--line);background:var(--surface);
+    display:inline-grid;place-items:center;cursor:pointer;color:var(--ink-2);transition:.15s;flex:none}
+  .iconbtn svg{width:14px;height:14px}
+  .iconbtn:hover{background:var(--surface-2);border-color:#CBDBF6;color:var(--brand)}
+  .iconbtn.danger:hover{color:var(--danger);border-color:#E7C4C0;background:var(--danger-l)}
+  .ansbody{font-size:13px;color:var(--ink-2);line-height:1.55;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:9px;padding:12px 13px;white-space:pre-wrap}
+
   /* modal */
-  .modal{position:fixed;inset:0;z-index:200;background:rgba(16,33,30,.5);display:none;
+  .modal{position:fixed;inset:0;z-index:200;background:rgba(12,30,64,.5);display:none;
     align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(2px)}
   .modal.on{display:flex}
   .modal-card{background:var(--surface);border-radius:14px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);
@@ -256,6 +308,42 @@
   .checklist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
   .checklist li{display:flex;align-items:center;gap:9px;font-size:13px}
   .checklist svg{width:16px;height:16px;color:var(--ok);flex:none}
+
+  /* approval chain flow */
+  .chainflow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:4px 0 2px}
+  .chainstep{flex:1;min-width:150px;display:flex;align-items:center}
+  .chainstep .node{flex:1;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+    padding:12px 12px 13px;position:relative;transition:.2s}
+  .chainstep .node .ntop{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .chainstep .node .nicon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:none}
+  .chainstep .node .nicon svg{width:16px;height:16px}
+  .chainstep .node .nrole{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.15}
+  .chainstep .node .nby{font-size:11px;color:var(--muted);margin-top:1px}
+  .chainstep .node .nstat{font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+  .chainstep .node .nstat svg{width:12px;height:12px}
+  .chainstep .arrow{flex:none;width:26px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+  .chainstep .arrow svg{width:18px;height:18px}
+  .chainstep.done .node{background:var(--ok-l);border-color:#BFE0CE}
+  .chainstep.done .nicon{background:var(--ok);color:#fff}
+  .chainstep.done .nstat{color:var(--ok)}
+  .chainstep.active .node{background:var(--brand-l);border-color:#B7D0F7;box-shadow:0 0 0 3px var(--brand-l)}
+  .chainstep.active .nicon{background:var(--brand);color:#fff}
+  .chainstep.active .nstat{color:var(--brand)}
+  .chainstep.client .node{border-style:dashed}
+  .clientbadge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;letter-spacing:.03em;
+    text-transform:uppercase;color:var(--brand);background:var(--brand-l);padding:2px 7px;border-radius:20px;margin-top:8px}
+  .clientbadge svg{width:11px;height:11px}
+  @media(max-width:900px){.chainstep{min-width:100%;flex-direction:column}.chainstep .arrow{width:100%;height:22px;transform:rotate(90deg)}}
+
+  /* Section 63 evidence bundle */
+  .s63grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 4px}
+  .s63row{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;background:var(--surface-2);
+    border:1px solid var(--line);border-radius:9px}
+  .s63row svg{width:15px;height:15px;color:var(--ok);flex:none;margin-top:1px}
+  .s63row .s63k{font-size:12px;font-weight:700;color:var(--ink);line-height:1.2}
+  .s63row .s63v{font-size:11px;color:var(--muted);margin-top:2px;line-height:1.3}
+  .s63row .s63v.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--ink-2)}
+  @media(max-width:560px){.s63grid{grid-template-columns:1fr}}
 
   /* toast */
   #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:300;
@@ -281,7 +369,7 @@
   .cfilt span{color:var(--muted);margin-left:4px;font-variant-numeric:tabular-nums}
   .cfilt:hover{background:var(--surface-2)}
   .cfilt.on{background:var(--brand);border-color:var(--brand);color:#fff}
-  .cfilt.on span{color:#CFE3DF}
+  .cfilt.on span{color:#CBDBF6}
   .empty{text-align:center;padding:40px;color:var(--muted)}
 
   .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -290,6 +378,36 @@
   .metric-lg .l{font-size:11.5px;color:var(--muted);font-weight:600}
   .barmini{height:6px;background:#EEEBE4;border-radius:4px;overflow:hidden;margin-top:6px}
   .barmini i{display:block;height:100%;background:var(--brand);border-radius:4px}
+
+  /* ===== API MANAGEMENT ===== */
+  .switch{position:relative;display:inline-block;width:38px;height:22px;flex:none}
+  .switch input{opacity:0;width:0;height:0;position:absolute}
+  .switch .track{position:absolute;inset:0;background:#C6CFDE;border-radius:20px;transition:.2s;cursor:pointer}
+  .switch .track::before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;
+    border-radius:50%;transition:.2s;box-shadow:0 1px 2px rgba(12,30,64,.3)}
+  .switch input:checked + .track{background:var(--brand)}
+  .switch input:checked + .track::before{transform:translateX(16px)}
+  .switch input:focus-visible + .track{box-shadow:0 0 0 3px var(--brand-l)}
+  .apigrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+  .apicard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:13px;transition:.2s}
+  .apicard.off{background:var(--surface-2);opacity:.72}
+  .apihead{display:flex;align-items:flex-start;gap:12px}
+  .apiicon{width:38px;height:38px;border-radius:9px;flex:none;display:grid;place-items:center;
+    background:var(--brand-l);color:var(--brand)}
+  .apiicon svg{width:19px;height:19px}
+  .apinm{font-weight:700;font-size:13.5px;letter-spacing:-.01em}
+  .apicat{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .apihead .switch{margin-left:auto}
+  .apikey{display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:8px;padding:7px 9px}
+  .apicard.off .apikey{background:#fff}
+  .keymask{flex:1;font-size:12px;color:var(--ink-2);letter-spacing:.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .keybtn{background:none;border:1px solid var(--line);border-radius:6px;padding:5px;color:var(--ink-2);display:grid;place-items:center}
+  .keybtn svg{width:14px;height:14px;display:block}
+  .keybtn:hover{background:var(--surface);border-color:var(--brand);color:var(--brand)}
+  .apifoot{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+  .apifoot .sep{margin-left:auto}
 
   @media(max-width:1080px){.kpis{grid-template-columns:repeat(3,1fr)}.cols,.cols3,.rev,.split,.g2{grid-template-columns:1fr}}
   @media(max-width:900px){
@@ -321,6 +439,8 @@
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M10 11v6M14 11v6"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></symbol>
@@ -329,8 +449,12 @@
   <symbol id="i-export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
   <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol>
   <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6"/><path d="M7 8h10v3a5 5 0 0 1-10 0z"/><path d="M12 16v6"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="5"/><path d="m11.5 11.5 8.5 8.5M17 17l2-2M15 19l2-2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></symbol>
   <defs>
-    <linearGradient id="g-brand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E5B54"/><stop offset="1" stop-color="#BC5A2C"/></linearGradient>
+    <linearGradient id="g-brand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0C1E40"/><stop offset="1" stop-color="#0E66E7"/></linearGradient>
     <linearGradient id="g-warm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C9A0"/><stop offset="1" stop-color="#E0965E"/></linearGradient>
     <linearGradient id="g-dawn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BCDDE6"/><stop offset=".6" stop-color="#F6D9A8"/><stop offset="1" stop-color="#EFAF77"/></linearGradient>
     <linearGradient id="g-sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8CB7C"/><stop offset="1" stop-color="#D66E39"/></linearGradient>
@@ -412,7 +536,7 @@
       <p>Every generation, screening, review and publish action - governed, disclosed and audited. This is the operations dashboard behind <strong>Ria</strong>, the AI tourism persona for Goa.</p>
       <div class="pillrow">
         <span class="miniflag">IT Rules 2026 · SGI</span><span class="miniflag">DPDP Act 2023</span>
-        <span class="miniflag">EU AI Act</span><span class="miniflag">NIST AI RMF</span><span class="miniflag">PRISM · 22 verticals</span>
+        <span class="miniflag">EU AI Act</span><span class="miniflag">NIST AI RMF</span><span class="miniflag">Trust Shield · 22 verticals</span>
       </div>
     </div>
     <div class="residency" style="color:#9FB6B0"><span class="dot"></span> Hosted in India · asia-south1 (Mumbai)</div>
@@ -462,6 +586,9 @@
       <button class="navitem" data-s="reports"><svg><use href="#i-chart"/></svg> Reports &amp; Analytics</button>
       <button class="navitem" data-s="jobs"><svg><use href="#i-layers"/></svg> Jobs &amp; Queue</button>
       <button class="navitem" data-s="users"><svg><use href="#i-users"/></svg> Users &amp; Roles</button>
+
+      <div class="navlabel">Configuration</div>
+      <button class="navitem" data-s="apis"><svg><use href="#i-plug"/></svg> API Management</button>
     </nav>
     <div class="foot">
       <div class="residency"><span class="dot"></span> India-region · no data leaves India</div>
@@ -514,7 +641,7 @@
 
         <div class="cols">
           <div class="card card-p">
-            <div class="sec-h"><h3>Conversational governance - this week</h3><span class="pill p-brand">Website · IG DM · IG Comments</span></div>
+            <div class="sec-h"><h3>Conversational governance - this week</h3><span class="pill p-brand">IG DM · IG Comments</span></div>
             <div class="bars">
               <div class="b"><div class="bar" style="height:52%"></div><div class="bl">Mon</div></div>
               <div class="b"><div class="bar" style="height:68%"></div><div class="bl">Tue</div></div>
@@ -529,15 +656,16 @@
               <div class="metric-lg"><span class="v tnum" style="color:var(--warn)">18</span><span class="l">Routed to human review (8-9)</span></div>
               <div class="metric-lg"><span class="v tnum" style="color:var(--danger)">2</span><span class="l">Crisis blocked (9-10)</span></div>
             </div>
+            <div style="margin-top:12px;font-size:11.5px;color:var(--muted)">Live intent-scored generation applies to Instagram channels. The public website serves pre-cleared answers from the Response Library (no live generation).</div>
           </div>
           <div class="card card-p">
             <div class="sec-h"><h3>Recent activity</h3></div>
             <div class="feed">
               <div class="feeditem"><div class="fi"><svg><use href="#i-check"/></svg></div><div><div class="ft">“Fontainhas heritage walk” approved &amp; published</div><div class="fm">by Meghna R. · watermark + provenance verified</div></div><time>4m</time></div>
-              <div class="feeditem"><div class="fi" style="background:var(--flag-l);color:var(--flag)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">PRISM flag - “Dietary / Religion” on feni reel</div><div class="fm">routed to review queue</div></div><time>22m</time></div>
+              <div class="feeditem"><div class="fi" style="background:var(--flag-l);color:var(--flag)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">Trust Shield flag - “Dietary / Religion” on feni reel</div><div class="fm">routed to review queue</div></div><time>22m</time></div>
               <div class="feeditem"><div class="fi" style="background:var(--danger-l);color:var(--danger)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">Crisis protocol triggered - IG Direct Message</div><div class="fm">iCall India helpline issued · escalated</div></div><time>1h</time></div>
               <div class="feeditem"><div class="fi"><svg><use href="#i-doc"/></svg></div><div><div class="ft">“Monsoon mornings in Divar” generated</div><div class="fm">SGI watermark embedded at generation</div></div><time>2h</time></div>
-              <div class="feeditem"><div class="fi"><svg><use href="#i-cam"/></svg></div><div><div class="ft">3 comment replies posted autonomously</div><div class="fm">all cleared PRISM · score ≤ 8</div></div><time>3h</time></div>
+              <div class="feeditem"><div class="fi"><svg><use href="#i-cam"/></svg></div><div><div class="ft">3 comment replies posted autonomously</div><div class="fm">all cleared Trust Shield · score ≤ 8</div></div><time>3h</time></div>
             </div>
           </div>
         </div>
@@ -571,7 +699,7 @@
               <tr class="clickable" onclick="openReview('feni')">
                 <td><div class="cellitem"><div class="thumb"><svg><use href="#sc-cashew"/></svg><span class="aibadge" style="position:absolute;top:4px;left:4px">AI</span></div><div><div class="t">Feni - a Goan heritage story</div><div class="s">Reel · 55s</div></div></div></td>
                 <td><span class="pill p-mut">Reel</span></td><td>Konkani</td>
-                <td><span class="cchip pend"><svg><use href="#i-alert"/></svg>PRISM flag</span></td>
+                <td><span class="cchip pend"><svg><use href="#i-alert"/></svg>Trust Shield flag</span></td>
                 <td><span class="pill p-flag">Flagged · review</span></td><td class="tnum">22m ago</td>
               </tr>
               <tr class="clickable" onclick="go('editor')">
@@ -608,7 +736,7 @@
           </div>
           <div class="card card-p">
             <div class="sec-h"><h3>Preview</h3><span class="pill p-mut">Draft</span></div>
-            <div class="preview-media" style="background:linear-gradient(135deg,#0E5B54,#BC5A2C)">
+            <div class="preview-media" style="background:linear-gradient(135deg,#0C1E40,#0E66E7)">
               <svg class="scene"><use href="#sc-heritage"/></svg>
               <span style="opacity:.95;font-weight:600;position:relative;text-shadow:0 1px 3px rgba(0,0,0,.35)">Ria · Fontainhas reel</span>
               <span class="aibadge" style="position:absolute;top:10px;left:10px">AI-Generated</span>
@@ -618,7 +746,7 @@
               <div class="cchip"><svg><use href="#i-check"/></svg> Non-removable SGI watermark embedded at generation</div>
               <div class="cchip"><svg><use href="#i-check"/></svg> Spoken disclosure: “This content is AI-generated”</div>
               <div class="cchip"><svg><use href="#i-check"/></svg> C2PA provenance: content ID, timestamp, model, operator</div>
-              <div class="cchip pend"><svg><use href="#i-alert"/></svg> PRISM 22-vertical screening runs before review</div>
+              <div class="cchip pend"><svg><use href="#i-alert"/></svg> Trust Shield 22-vertical screening runs before review</div>
             </div>
             <div class="actionbar">
               <button class="btn" onclick="toast('Draft saved')">Save draft</button>
@@ -653,7 +781,7 @@
           <button class="tab">Approved</button><button class="tab">Rejected</button>
         </div>
         <div class="tablewrap"><table>
-          <thead><tr><th>Item</th><th>Source</th><th>PRISM</th><th>Intent score</th><th>Priority</th></tr></thead>
+          <thead><tr><th>Item</th><th>Source</th><th>Trust Shield</th><th>Intent score</th><th>Priority</th></tr></thead>
           <tbody>
             <tr class="clickable" onclick="openReview('crisis')">
               <td class="cellitem"><span class="t">“feeling really low, alone out here…”</span></td>
@@ -677,8 +805,8 @@
               <td><span class="pill p-warn">High</span></td>
             </tr>
             <tr class="clickable" onclick="openReview('politics')">
-              <td class="cellitem"><span class="t">“what does Ria think of the new tourism policy?”</span></td>
-              <td><span class="chan"><svg><use href="#i-globe"/></svg>Website chat</span></td>
+              <td class="cellitem"><span class="t">“what's your take on the new tourism policy?”</span></td>
+              <td><span class="chan"><svg><use href="#i-cam"/></svg>IG Comment</span></td>
               <td><span class="pill p-flag">Political</span></td>
               <td><div class="intent"><div class="track"><span class="mk" style="left:83%"></span></div><div class="lg"><span>auto</span><span class="sc" style="color:var(--warn)">8.4</span></div></div></td>
               <td><span class="pill p-warn">Medium</span></td>
@@ -705,7 +833,7 @@
           </div>
           <div style="display:flex;flex-direction:column;gap:16px">
             <div class="card card-p">
-              <div class="sec-h"><h3>PRISM screening</h3></div>
+              <div class="sec-h"><h3>Trust Shield screening</h3></div>
               <div class="prismbox" id="rdPrism"></div>
             </div>
             <div class="card card-p">
@@ -718,8 +846,51 @@
 
       <!-- ===== APPROVALS ===== -->
       <section class="screen" id="approvals">
-        <div class="sec-h"><h3>Approvals</h3><span class="pill p-brand">Admin final approval</span></div>
-        <p style="color:var(--muted);margin-bottom:16px;max-width:74ch">Reviewer-approved items awaiting your final publish authorisation. Nothing publishes autonomously - the integrity check must pass first.</p>
+        <div class="sec-h"><h3>Approvals</h3><span class="pill p-brand">Client-side final publish</span></div>
+        <p style="color:var(--muted);margin-bottom:16px;max-width:74ch">Reviewer-approved items awaiting your final publish authorisation. Nothing publishes autonomously - the full approval chain must complete and the integrity check must pass first.</p>
+
+        <div class="card card-p" style="margin-bottom:18px">
+          <div class="sec-h"><h3>Publish approval chain</h3><span class="pill p-mut">Every publish follows this path</span></div>
+          <p style="color:var(--muted);font-size:12.5px;margin:2px 0 14px;max-width:80ch">Each asset moves through five explicit gates. Every stage is role-enforced and audit-logged - the final publish control sits with the client, on the client side.</p>
+          <div class="chainflow">
+            <div class="chainstep done">
+              <div class="node">
+                <div class="ntop"><div class="nicon"><svg><use href="#i-edit"/></svg></div><div><div class="nrole">Creator</div><div class="nby">Raghav C.</div></div></div>
+                <div class="nstat"><svg><use href="#i-check"/></svg> Generated &amp; submitted</div>
+              </div>
+              <div class="arrow"><svg><use href="#i-arrow"/></svg></div>
+            </div>
+            <div class="chainstep done">
+              <div class="node">
+                <div class="ntop"><div class="nicon"><svg><use href="#i-eye"/></svg></div><div><div class="nrole">Reviewer</div><div class="nby">Meghna R.</div></div></div>
+                <div class="nstat"><svg><use href="#i-check"/></svg> Reviewed &amp; approved</div>
+              </div>
+              <div class="arrow"><svg><use href="#i-arrow"/></svg></div>
+            </div>
+            <div class="chainstep done">
+              <div class="node">
+                <div class="ntop"><div class="nicon"><svg><use href="#i-shieldcheck"/></svg></div><div><div class="nrole">Compliance Check</div><div class="nby">Trust Shield · 22 verticals</div></div></div>
+                <div class="nstat"><svg><use href="#i-check"/></svg> Cleared · 0 flags</div>
+              </div>
+              <div class="arrow"><svg><use href="#i-arrow"/></svg></div>
+            </div>
+            <div class="chainstep active">
+              <div class="node">
+                <div class="ntop"><div class="nicon"><svg><use href="#i-badge"/></svg></div><div><div class="nrole">Client Approver</div><div class="nby">You · Persona OS admin</div></div></div>
+                <div class="nstat"><svg><use href="#i-check"/></svg> Awaiting your authorisation</div>
+              </div>
+              <div class="arrow"><svg><use href="#i-arrow"/></svg></div>
+            </div>
+            <div class="chainstep client">
+              <div class="node">
+                <div class="ntop"><div class="nicon"><svg><use href="#i-send"/></svg></div><div><div class="nrole">Client Publish</div><div class="nby">Goes live → @ria.goa</div></div></div>
+                <div class="nstat" style="color:var(--muted)">Pending approval</div>
+                <span class="clientbadge"><svg><use href="#i-shieldcheck"/></svg> Client-side control</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="cols3">
           <div class="card card-p">
             <div class="preview-media" style="background:linear-gradient(135deg,#245C97,#4A87C4);aspect-ratio:16/10"><svg class="scene"><use href="#sc-beach"/></svg><span class="aibadge" style="position:absolute;top:8px;left:8px">AI-Generated</span></div>
@@ -728,7 +899,7 @@
             <ul class="checklist" style="margin-bottom:14px">
               <li><svg><use href="#i-check"/></svg> Watermark verified</li>
               <li><svg><use href="#i-check"/></svg> Provenance intact</li>
-              <li><svg><use href="#i-check"/></svg> PRISM cleared (0 flags)</li>
+              <li><svg><use href="#i-check"/></svg> Trust Shield cleared (0 flags)</li>
             </ul>
             <button class="btn btn-ok" style="width:100%;justify-content:center" onclick="openModal('mPublish')"><svg><use href="#i-check"/></svg> Approve &amp; publish</button>
           </div>
@@ -739,7 +910,7 @@
             <ul class="checklist" style="margin-bottom:14px">
               <li><svg><use href="#i-check"/></svg> Watermark verified</li>
               <li><svg><use href="#i-check"/></svg> Provenance intact</li>
-              <li><svg><use href="#i-check"/></svg> PRISM cleared (0 flags)</li>
+              <li><svg><use href="#i-check"/></svg> Trust Shield cleared (0 flags)</li>
             </ul>
             <button class="btn btn-ok" style="width:100%;justify-content:center" onclick="openModal('mPublish')"><svg><use href="#i-check"/></svg> Approve &amp; publish</button>
           </div>
@@ -750,7 +921,7 @@
             <ul class="checklist" style="margin-bottom:14px">
               <li><svg><use href="#i-check"/></svg> Watermark verified</li>
               <li><svg><use href="#i-check"/></svg> Provenance intact</li>
-              <li><svg><use href="#i-check"/></svg> PRISM cleared (0 flags)</li>
+              <li><svg><use href="#i-check"/></svg> Trust Shield cleared (0 flags)</li>
             </ul>
             <button class="btn btn-ok" style="width:100%;justify-content:center" onclick="openModal('mPublish')"><svg><use href="#i-check"/></svg> Approve &amp; publish</button>
           </div>
@@ -864,24 +1035,55 @@
         </div>
       </section>
 
-      <!-- ===== WEBSITE CHAT ===== -->
+      <!-- ===== WEBSITE CHAT (predefined-option public assistant) ===== -->
       <section class="screen" id="webchat">
-        <div class="sec-h"><h3>Website Chat</h3><span class="pill p-mut">Anonymous · session-based · PII-scrubbed (DPDP)</span></div>
+        <div class="sec-h"><h3>Website Chat</h3><span class="pill p-ok">Predefined-option · public assistant</span></div>
+        <p style="color:var(--muted);margin-bottom:14px;max-width:84ch">The public website assistant is <strong>guided by predefined options</strong> and replies only from a <strong>Trust Shield-cleared Response Library</strong>. No answer is generated live for the public - every reply a visitor can receive was authored and passed the 22-vertical compliance review <em>before</em> entering the library.</p>
+        <div class="cchip" style="margin-bottom:16px"><svg><use href="#i-shieldcheck"/></svg> Zero live generation on the public surface · every served answer is pre-cleared &amp; audit-traceable</div>
+
         <div class="kpis" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
-          <div class="kpi"><div class="lab">Sessions (7d)</div><div class="val tnum">214</div></div>
-          <div class="kpi"><div class="lab">AI replies sent</div><div class="val tnum" style="color:var(--ok)">208</div></div>
+          <div class="kpi"><div class="lab">Library answers (live)</div><div class="val tnum" style="color:var(--ok)">146</div></div>
+          <div class="kpi"><div class="lab">Pending Trust Shield review</div><div class="val tnum" style="color:var(--warn)">7</div></div>
+          <div class="kpi"><div class="lab">Guided sessions (7d)</div><div class="val tnum">214</div></div>
           <div class="kpi crit"><div class="lab">Crisis · safety message</div><div class="val tnum">3</div></div>
-          <div class="kpi"><div class="lab">Thumbs-up</div><div class="val tnum">93%</div></div>
         </div>
-        <div class="tablewrap"><table>
-          <thead><tr><th>Session</th><th>Message</th><th>Intent</th><th>Outcome</th><th>Time</th></tr></thead>
-          <tbody>
-            <tr class="clickable" onclick="openReview('ok2')"><td class="mono">#A1B2</td><td>"Best hidden beaches in South Goa?"</td><td class="mono tnum" style="color:var(--ok)">2.0</td><td><span class="pill p-ok">AI reply sent</span></td><td class="tnum">2m</td></tr>
-            <tr class="clickable" onclick="openReview('w_ai')"><td class="mono">#C3D4</td><td>"Is Ria a real person?"</td><td class="mono tnum" style="color:var(--ok)">3.1</td><td><span class="pill p-ok">AI reply sent</span></td><td class="tnum">18m</td></tr>
-            <tr class="clickable" onclick="openReview('w_crisis')"><td class="mono">#E5F6</td><td>"honestly I don't see the point in anything anymore"</td><td class="mono tnum" style="color:var(--danger)">9.6</td><td><span class="pill p-danger">Static safety message</span></td><td class="tnum">40m</td></tr>
-            <tr class="clickable" onclick="openReview('ok2')"><td class="mono">#G7H8</td><td>"What should I pack for a monsoon trip?"</td><td class="mono tnum" style="color:var(--ok)">1.7</td><td><span class="pill p-ok">AI reply sent</span></td><td class="tnum">1h</td></tr>
-          </tbody>
-        </table></div>
+
+        <div class="cols" style="grid-template-columns:1fr 420px;align-items:start">
+          <div class="card card-p">
+            <div class="sec-h"><h3>Response Library</h3><div class="act"><button class="btn btn-sm"><svg><use href="#i-export"/></svg> Filter</button><button class="btn btn-sm btn-pri" onclick="openModal('mAddAnswer')"><svg><use href="#i-plus"/></svg> Add answer</button></div></div>
+            <p style="color:var(--muted);font-size:12.5px;margin:2px 0 12px;max-width:72ch">Every predefined answer must pass Trust Shield review before it goes live. Nothing enters the public option flow until it is cleared - review, override and rejection are all audit-logged.</p>
+            <div class="tablewrap" style="border:none"><table>
+              <thead><tr><th>Predefined answer</th><th>Topic</th><th>Lang</th><th>Trust Shield</th><th>Ver</th><th>Updated</th><th style="text-align:right">Actions</th></tr></thead>
+              <tbody>
+                <tr><td class="cellitem"><span class="t">Best hidden beaches in South Goa</span></td><td>Beaches</td><td class="mono">En·Hi·Kok</td><td><span class="pill p-ok">Cleared · live</span></td><td class="mono">v3</td><td class="tnum">2d</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('beaches')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('beaches')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('beaches')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+                <tr><td class="cellitem"><span class="t">Is Ria a real person? (AI disclosure)</span></td><td>About Ria</td><td class="mono">En·Hi·Kok</td><td><span class="pill p-ok">Cleared · live</span></td><td class="mono">v2</td><td class="tnum">5d</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('disclosure')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('disclosure')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('disclosure')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+                <tr><td class="cellitem"><span class="t">Best time to visit &amp; monsoon guide</span></td><td>Seasonal</td><td class="mono">En·Hi</td><td><span class="pill p-ok">Cleared · live</span></td><td class="mono">v4</td><td class="tnum">1d</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('seasonal')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('seasonal')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('seasonal')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+                <tr><td class="cellitem"><span class="t">Feni &amp; food culture (heritage framing)</span></td><td>Food</td><td class="mono">En·Kok</td><td><span class="pill p-warn">In Trust Shield review</span></td><td class="mono">v1</td><td class="tnum">3h</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('food')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('food')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('food')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+                <tr><td class="cellitem"><span class="t">Getting around - ferries &amp; rentals</span></td><td>Transport</td><td class="mono">En·Hi</td><td><span class="pill p-ok">Cleared · live</span></td><td class="mono">v2</td><td class="tnum">6d</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('transport')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('transport')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('transport')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+                <tr><td class="cellitem"><span class="t">Nightlife near Anjuna</span></td><td>Nightlife</td><td class="mono">En</td><td><span class="pill p-danger">Blocked · returned</span></td><td class="mono">—</td><td class="tnum">1d</td><td>
+                  <div class="rowacts"><button class="iconbtn" title="View answer" onclick="viewAnswer('nightlife')"><svg><use href="#i-eye"/></svg></button><button class="iconbtn" title="Edit answer" onclick="editAnswer('nightlife')"><svg><use href="#i-edit"/></svg></button><button class="iconbtn danger" title="Delete answer" onclick="askDelAnswer('nightlife')"><svg><use href="#i-trash"/></svg></button></div></td></tr>
+              </tbody>
+            </table></div>
+            <div class="libcap" style="margin-top:14px"><svg><use href="#i-shieldcheck"/></svg> 146 of 153 answers cleared &amp; live · 7 held in review · 100% of served answers pre-screened</div>
+          </div>
+
+          <div class="card card-p">
+            <div class="sec-h"><h3>Visitor experience</h3><span class="pill p-ok">Live simulation</span></div>
+            <p style="color:var(--muted);font-size:12px;margin:2px 0 12px">A working simulation of the public flow - <strong>click an option or type a question</strong> to try exactly how a visitor interacts. Every reply is drawn from the cleared library.</p>
+            <div class="chatprev">
+              <div class="cp-h"><span class="cp-av"><svg viewBox="0 0 48 48" width="30" height="30"><use href="#ria"/></svg></span><div><div class="cp-nm">Ria</div><div class="cp-sub">Goa tourism assistant</div></div><button class="cp-restart" title="Restart chat" onclick="cpReset()"><svg><use href="#i-refresh"/></svg></button><span class="cp-ai">AI</span></div>
+              <div class="cp-scroll" id="cpBody"></div>
+              <div class="cp-input"><input id="cpText" type="text" placeholder="Type a question…" onkeydown="if(event.key==='Enter')cpSend()"><button class="cp-send" onclick="cpSend()" title="Send"><svg><use href="#i-send"/></svg></button></div>
+              <div class="cp-foot"><svg><use href="#i-shieldcheck"/></svg> Served from the Trust Shield-cleared library · not generated live</div>
+            </div>
+            <div class="band" style="margin-top:14px"><div class="bandbar" style="background:var(--danger)"></div><div><h4>Safety override always on</h4><p>Try typing something distressing - crisis / self-harm input returns the fixed iCall safety message, never a generated reply.</p></div></div>
+          </div>
+        </div>
       </section>
 
       <!-- ===== INSTAGRAM COMMENTS ===== -->
@@ -900,7 +1102,7 @@
           <button class="cfilt" onclick="filterComments('noreply',this)">No reply <span>1</span></button>
         </div>
         <div class="tablewrap"><table>
-          <thead><tr><th>Comment</th><th>On post</th><th>PRISM</th><th>Intent</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Comment</th><th>On post</th><th>Trust Shield</th><th>Intent</th><th>Status</th><th></th></tr></thead>
           <tbody>
             <tr class="clickable crow" data-status="review" onclick="openReview('politics')">
               <td><div class="t">@rahul.travels</div><div class="s">"what's your take on the new state tourism policy?"</div></td>
@@ -1007,12 +1209,12 @@
             <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin-top:16px">
               <div style="width:94.2%;background:var(--ok)"></div><div style="width:4.6%;background:var(--warn)"></div><div style="width:1.2%;background:var(--danger)"></div>
             </div>
-            <div style="margin-top:12px;font-size:12px;color:var(--muted)">Every interaction is PRISM-screened and intent-scored before a response decision.</div>
+            <div style="margin-top:12px;font-size:12px;color:var(--muted)">Instagram interactions are Trust Shield-screened and intent-scored live before a response decision; public website answers are pre-cleared into the Response Library before they can ever be served.</div>
           </div>
         </div>
         <div class="cols" style="margin-top:16px">
           <div class="card card-p">
-            <div class="sec-h"><h3>PRISM performance - flag rate by vertical</h3><span class="pill p-brand">Compliance</span></div>
+            <div class="sec-h"><h3>Trust Shield performance - flag rate by vertical</h3><span class="pill p-brand">Compliance</span></div>
             <div style="display:flex;flex-direction:column;gap:11px;margin-top:6px">
               <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:2px"><span>Political affiliation</span><span class="mono">2.1%</span></div><div class="barmini"><i style="width:42%;background:var(--flag)"></i></div></div>
               <div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:2px"><span>Dietary preference</span><span class="mono">1.6%</span></div><div class="barmini"><i style="width:32%;background:var(--flag)"></i></div></div>
@@ -1072,7 +1274,7 @@
           <tbody>
             <tr><td class="mono">JOB-8842</td><td>Video generation</td><td><span class="pill p-info">Running</span></td><td class="tnum">0</td><td class="mono" style="color:var(--muted)">cor-1f9a…</td></tr>
             <tr><td class="mono">JOB-8841</td><td>Comment reply</td><td><span class="pill p-brand">Under governance</span></td><td class="tnum">0</td><td class="mono" style="color:var(--muted)">cor-77b2…</td></tr>
-            <tr><td class="mono">JOB-8839</td><td>Website chat</td><td><span class="pill p-ok">Completed</span></td><td class="tnum">0</td><td class="mono" style="color:var(--muted)">cor-2c40…</td></tr>
+            <tr><td class="mono">JOB-8839</td><td>Website · library serve</td><td><span class="pill p-ok">Completed</span></td><td class="tnum">0</td><td class="mono" style="color:var(--muted)">cor-2c40…</td></tr>
             <tr><td class="mono">JOB-8836</td><td>IG DM webhook</td><td><span class="pill p-danger">Dead-letter</span></td><td class="tnum">3</td><td class="mono" style="color:var(--muted)">cor-90ee…</td></tr>
           </tbody>
         </table></div>
@@ -1124,19 +1326,19 @@
         </div>
 
         <div class="card card-p" style="margin-bottom:16px">
-          <div class="sec-h"><h3>PRISM - 22 governance verticals</h3><span class="pill p-ok">All active · pre-output gate</span></div>
+          <div class="sec-h"><h3>Trust Shield - 22 governance verticals</h3><span class="pill p-ok">All active · pre-output gate</span></div>
           <div class="verts" id="verts"></div>
         </div>
 
         <div class="card card-p">
-          <div class="sec-h"><h3>Audit log explorer</h3><div class="act"><button class="btn btn-sm" onclick="toast('Audit log exported')"><svg><use href="#i-export"/></svg> Export</button></div></div>
+          <div class="sec-h"><h3>Audit log explorer</h3><div class="act"><button class="btn btn-sm" onclick="toast('Audit log exported (CSV)')"><svg><use href="#i-export"/></svg> Export log (CSV)</button><button class="btn btn-sm btn-pri" onclick="openModal('mS63')"><svg><use href="#i-shieldcheck"/></svg> Section 63 Evidence Export</button></div></div>
           <div class="tablewrap" style="border:none"><table>
             <thead><tr><th>Time</th><th>Actor</th><th>Event</th><th>Detail</th></tr></thead>
             <tbody>
-              <tr><td class="mono tnum">10:42:07</td><td>Meghna R.</td><td><span class="pill p-flag">PRISM override</span></td><td>Feni reel · Dietary flag · “cultural heritage only, govt-safe”</td></tr>
+              <tr><td class="mono tnum">10:42:07</td><td>Meghna R.</td><td><span class="pill p-flag">Trust Shield override</span></td><td>Feni reel · Dietary flag · “cultural heritage only, govt-safe”</td></tr>
               <tr><td class="mono tnum">10:41:55</td><td>System</td><td><span class="pill p-danger">Crisis triggered</span></td><td>IG DM · intent 9.8 · iCall issued</td></tr>
               <tr><td class="mono tnum">10:39:12</td><td>Raghav C.</td><td><span class="pill p-info">Published</span></td><td>Fontainhas reel · watermark+provenance verified</td></tr>
-              <tr><td class="mono tnum">10:36:40</td><td>System</td><td><span class="pill p-ok">Auto reply</span></td><td>Website · intent 2.0 · knowledge-grounded</td></tr>
+              <tr><td class="mono tnum">10:36:40</td><td>System</td><td><span class="pill p-ok">Library answer served</span></td><td>Website · predefined option “Hidden beaches” · Trust Shield-cleared</td></tr>
               <tr><td class="mono tnum">10:30:18</td><td>Arjun P.</td><td><span class="pill p-danger">Rejected</span></td><td>Draft reel · “off-brand, too polished” · regeneration requested</td></tr>
             </tbody>
           </table></div>
@@ -1149,10 +1351,156 @@
         <div class="card card-p">
           <div class="feed">
             <div class="feeditem"><div class="fi" style="background:var(--danger-l);color:var(--danger)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">Comment crisis flag - human review required</div><div class="fm">IG DM · @wanderlust_maya · intent 9.8</div></div><time>1h</time></div>
-            <div class="feeditem"><div class="fi" style="background:var(--flag-l);color:var(--flag)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">Comment reply suppressed (PRISM flag)</div><div class="fm">IG Comment · drug facilitation</div></div><time>1h</time></div>
+            <div class="feeditem"><div class="fi" style="background:var(--flag-l);color:var(--flag)"><svg><use href="#i-alert"/></svg></div><div><div class="ft">Comment reply suppressed (Trust Shield flag)</div><div class="fm">IG Comment · drug facilitation</div></div><time>1h</time></div>
             <div class="feeditem"><div class="fi"><svg><use href="#i-shieldcheck"/></svg></div><div><div class="ft">Content pending your review</div><div class="fm">“Feni - a Goan heritage story”</div></div><time>22m</time></div>
             <div class="feeditem"><div class="fi" style="background:var(--ok-l);color:var(--ok)"><svg><use href="#i-check"/></svg></div><div><div class="ft">Publishing completed</div><div class="fm">Fontainhas heritage walk → @ria.goa</div></div><time>4m</time></div>
-            <div class="feeditem"><div class="fi"><svg><use href="#i-cam"/></svg></div><div><div class="ft">Comment reply posted (autonomous)</div><div class="fm">3 replies · all cleared PRISM</div></div><time>3h</time></div>
+            <div class="feeditem"><div class="fi"><svg><use href="#i-cam"/></svg></div><div><div class="ft">Comment reply posted (autonomous)</div><div class="fm">3 replies · all cleared Trust Shield</div></div><time>3h</time></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== API MANAGEMENT ===== -->
+      <section class="screen" id="apis">
+        <div class="sec-h">
+          <h3>API management</h3>
+          <span class="pill p-brand">Configuration · Administrator</span>
+          <div class="act"><button class="btn btn-sm" onclick="toast('Connectivity re-checked · all reachable')"><svg><use href="#i-refresh"/></svg> Test all</button></div>
+        </div>
+
+        <div class="card card-p" style="margin-bottom:16px">
+          <div class="row" style="gap:24px">
+            <div class="metric-lg"><span class="v tnum">8<span style="color:var(--muted);font-weight:600">/9</span></span><span class="l">Services enabled</span></div>
+            <div class="metric-lg"><span class="v tnum" style="color:var(--ok)">Live</span><span class="l">All keys in India-region vault</span></div>
+            <div class="metric-lg"><span class="v tnum">Backend-only</span><span class="l">No keys ever reach the client</span></div>
+          </div>
+          <div class="cchip" style="margin-top:14px"><svg><use href="#i-shieldcheck"/></svg> All model calls are proxied through the Persona OS backend. Enabling, disabling or rotating a key is written to the audit log.</div>
+        </div>
+
+        <div class="apigrid">
+          <!-- Anthropic Claude -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-chat"/></svg></div>
+              <div><div class="apinm">Anthropic Claude</div><div class="apicat">LLM &amp; Vision · core reasoning</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'Anthropic Claude')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-ant-••••••••••••••7Yb2" data-full="sk-ant-api03-9fK2xQzM7Yb2">sk-ant-••••••••••••••7Yb2</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('Anthropic Claude')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('Anthropic Claude')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>Model: claude-opus · claude-sonnet</span><span class="sep">Checked 2m ago</span></div>
+          </div>
+
+          <!-- OpenAI Images -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-cam"/></svg></div>
+              <div><div class="apinm">OpenAI Images</div><div class="apicat">Image generation</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'OpenAI Images')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-••••••••••••••••4Qw9" data-full="sk-proj-Lm82Vt0aZ4Qw9">sk-••••••••••••••••4Qw9</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('OpenAI Images')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('OpenAI Images')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>gpt-image-1</span><span class="sep">Checked 5m ago</span></div>
+          </div>
+
+          <!-- OpenRouter Video -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-cam"/></svg></div>
+              <div><div class="apinm">OpenRouter Video</div><div class="apicat">Script-to-video generation</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'OpenRouter Video')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-or-••••••••••••••1Df6" data-full="sk-or-v1-8Ke3Ns7pR1Df6">sk-or-••••••••••••••1Df6</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('OpenRouter Video')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('OpenRouter Video')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>Avatar render pipeline</span><span class="sep">Checked 11m ago</span></div>
+          </div>
+
+          <!-- ElevenLabs -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-bell"/></svg></div>
+              <div><div class="apinm">ElevenLabs Enterprise</div><div class="apicat">Voice synthesis · Konkani / Hi / En</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'ElevenLabs')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="el-••••••••••••••••9Zt4" data-full="el_live_a72Bx6Qm9Zt4">el-••••••••••••••••9Zt4</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('ElevenLabs')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('ElevenLabs')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>Primary voice</span><span class="sep">Checked 3m ago</span></div>
+          </div>
+
+          <!-- OpenAI Embeddings -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-layers"/></svg></div>
+              <div><div class="apinm">OpenAI Embeddings</div><div class="apicat">Knowledge vectorisation</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'OpenAI Embeddings')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-••••••••••••••••4Qw9" data-full="sk-proj-Lm82Vt0aZ4Qw9">sk-••••••••••••••••4Qw9</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('OpenAI Embeddings')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('OpenAI Embeddings')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>text-embedding-3-large</span><span class="sep">Checked 9m ago</span></div>
+          </div>
+
+          <!-- Cohere Rerank -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-chart"/></svg></div>
+              <div><div class="apinm">Cohere Rerank</div><div class="apicat">Retrieval re-ranking</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'Cohere Rerank')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="co-••••••••••••••••7Hn2" data-full="co_prod_Yr4Wq1sV7Hn2">co-••••••••••••••••7Hn2</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('Cohere Rerank')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('Cohere Rerank')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>rerank-v3</span><span class="sep">Checked 9m ago</span></div>
+          </div>
+
+          <!-- OpenRouter LLM fallback -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-refresh"/></svg></div>
+              <div><div class="apinm">OpenRouter</div><div class="apicat">Multi-LLM fallback routing</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'OpenRouter')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-or-••••••••••••••1Df6" data-full="sk-or-v1-8Ke3Ns7pR1Df6">sk-or-••••••••••••••1Df6</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('OpenRouter')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('OpenRouter')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-info apistatus">Standby</span> <span>Fails over from Claude</span><span class="sep">Checked 6m ago</span></div>
+          </div>
+
+          <!-- Instagram Graph -->
+          <div class="apicard">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-globe"/></svg></div>
+              <div><div class="apinm">Instagram Graph API</div><div class="apicat">Publishing · DMs · comments</div></div>
+              <label class="switch"><input type="checkbox" checked onchange="toggleApi(this,'Instagram Graph API')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="IGQ••••••••••••••••Xa8" data-full="IGQWRPc3loZAk4Xa8">IGQ••••••••••••••••Xa8</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate token" onclick="rotateKey('Instagram Graph API')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('Instagram Graph API')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-ok apistatus">Connected</span> <span>@ria.goa · token valid 41d</span><span class="sep">Checked 1m ago</span></div>
+          </div>
+
+          <!-- OpenAI Speech (disabled example) -->
+          <div class="apicard off">
+            <div class="apihead">
+              <div class="apiicon"><svg><use href="#i-bell"/></svg></div>
+              <div><div class="apinm">OpenAI Speech</div><div class="apicat">Text-to-speech · backup voice</div></div>
+              <label class="switch"><input type="checkbox" onchange="toggleApi(this,'OpenAI Speech')"><span class="track"></span></label>
+            </div>
+            <div class="apikey"><span class="keymask mono" data-mask="sk-••••••••••••••••4Qw9" data-full="sk-proj-Lm82Vt0aZ4Qw9">sk-••••••••••••••••4Qw9</span>
+              <button class="keybtn" title="Reveal" onclick="revealKey(this)"><svg><use href="#i-eye"/></svg></button>
+              <button class="keybtn" title="Rotate key" onclick="rotateKey('OpenAI Speech')"><svg><use href="#i-refresh"/></svg></button>
+              <button class="btn btn-sm" onclick="openKey('OpenAI Speech')"><svg><use href="#i-key"/></svg> Update</button></div>
+            <div class="apifoot"><span class="pill p-mut apistatus">Disabled</span> <span>Superseded by ElevenLabs</span><span class="sep">—</span></div>
           </div>
         </div>
       </section>
@@ -1175,9 +1523,9 @@
 
 <div class="modal" id="mOverride">
   <div class="modal-card">
-    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--flag)"><use href="#i-shieldcheck"/></svg><h3>Override PRISM flag</h3></div>
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--flag)"><use href="#i-shieldcheck"/></svg><h3>Override Trust Shield flag</h3></div>
     <div class="modal-b">
-      <div class="reqnote"><svg style="width:14px;height:14px"><use href="#i-alert"/></svg> Overriding a PRISM flag requires a justification (mandatory audit entry).</div>
+      <div class="reqnote"><svg style="width:14px;height:14px"><use href="#i-alert"/></svg> Overriding a Trust Shield flag requires a justification (mandatory audit entry).</div>
       <textarea placeholder="e.g. Feni referenced as cultural heritage only, never promoted - meets government-safe content standard."></textarea>
     </div>
     <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-acc" onclick="closeModal();toast('Flag overridden · justification logged')">Override &amp; log</button></div>
@@ -1192,11 +1540,117 @@
       <ul class="checklist">
         <li><svg><use href="#i-check"/></svg> SGI watermark present &amp; non-removable</li>
         <li><svg><use href="#i-check"/></svg> C2PA provenance metadata intact</li>
-        <li><svg><use href="#i-check"/></svg> PRISM screening cleared (0 open flags)</li>
+        <li><svg><use href="#i-check"/></svg> Trust Shield screening cleared (0 open flags)</li>
         <li><svg><use href="#i-check"/></svg> Human review + admin approval recorded</li>
       </ul>
     </div>
     <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-ok" onclick="closeModal();toast('Published to @ria.goa · action logged')">Publish now</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mS63">
+  <div class="modal-card" style="max-width:640px">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--brand)"><use href="#i-shieldcheck"/></svg><h3>Section 63 Evidence Export</h3></div>
+    <div class="modal-b">
+      <p style="font-size:12.5px;color:var(--ink-2);margin-bottom:6px">Generates a court-admissible artefact bundle for the selected published asset, compiled per the Section 63 (BSA) evidentiary standard. Every element below is captured, hashed and sealed into a single signed package.</p>
+      <div class="cchip" style="margin-bottom:14px"><svg><use href="#i-shieldcheck"/></svg> Asset: “Fontainhas heritage reel” · published 10:39:12 · @ria.goa</div>
+      <div class="s63grid">
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Final asset</div><div class="s63v">Published master file (MP4) as delivered to channel</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">SGI label reference</div><div class="s63v mono">SGI-IN-2026-0714-0839</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Provenance metadata</div><div class="s63v">C2PA manifest · generator, model &amp; edit history</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Prompt summary</div><div class="s63v">Input prompt, knowledge sources &amp; generation params</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Review &amp; approval history</div><div class="s63v">Creator → Reviewer → Compliance → Client approver</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Audit-log history</div><div class="s63v">Full immutable event trail for this asset</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Hash values</div><div class="s63v mono">SHA-256 · a3f9…7c2e (asset + bundle)</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Chain-of-custody record</div><div class="s63v">Sequenced handling log with actor &amp; time per step</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Hosting location</div><div class="s63v">India-region store · ap-south-1 · vault-sealed</div></div></div>
+        <div class="s63row"><svg><use href="#i-check"/></svg><div><div class="s63k">Timestamp</div><div class="s63v mono">2026-07-14 10:39:12 IST (UTC+05:30)</div></div></div>
+        <div class="s63row" style="grid-column:1/-1"><svg><use href="#i-check"/></svg><div><div class="s63k">Signatory details</div><div class="s63v">Digitally signed by the authorising client approver · name, role &amp; credential embedded in the sealed package</div></div></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:12px">The bundle is generated as a signed, tamper-evident PDF/A + attachments archive. Generation is itself written to the audit log.</p>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-pri" onclick="closeModal();toast('Section 63 evidence bundle generated &amp; sealed · export logged')"><svg><use href="#i-export"/></svg> Generate evidence bundle</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mAddAnswer">
+  <div class="modal-card" style="max-width:560px">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--brand)"><use href="#i-plus"/></svg><h3>Add answer to Response Library</h3></div>
+    <div class="modal-b">
+      <div class="cchip pend" style="margin-bottom:14px"><svg><use href="#i-shieldcheck"/></svg> New answers enter as “In review” - they go live only once Trust Shield clears all 22 verticals.</div>
+      <div class="editor">
+        <label>Topic / option label</label>
+        <input type="text" placeholder="e.g. Hidden beaches in South Goa">
+        <label>Predefined answer (served verbatim to visitors)</label>
+        <textarea placeholder="Write the exact, on-brand answer Ria will return for this option. No live generation - this text is what the public sees once cleared."></textarea>
+        <label>Languages</label>
+        <select><option>English + Hindi + Konkani</option><option>English + Hindi</option><option>English + Konkani</option><option>English only</option></select>
+      </div>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:12px">On submit, the answer is queued for the 22-vertical Trust Shield compliance review. It does not appear in the public option flow until a reviewer clears it. Submission is written to the audit log.</p>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-pri" onclick="closeModal();toast('Answer submitted to Trust Shield review · goes live once cleared')"><svg><use href="#i-shieldcheck"/></svg> Submit for Trust Shield review</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mViewAnswer">
+  <div class="modal-card" style="max-width:560px">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--brand)"><use href="#i-eye"/></svg><h3>Response Library entry</h3></div>
+    <div class="modal-b">
+      <div class="sec-h" style="margin-bottom:10px"><h3 id="vaTopic" style="font-size:15px">Topic</h3><span class="pill" id="vaStatus" style="margin-left:auto">Status</span></div>
+      <div class="ansbody" id="vaBody">Answer text…</div>
+      <div style="margin-top:14px">
+        <div class="kv"><span class="k">Topic / category</span><span id="vaCat">—</span></div>
+        <div class="kv"><span class="k">Languages</span><span id="vaLang">—</span></div>
+        <div class="kv"><span class="k">Version</span><span id="vaVer" class="mono">—</span></div>
+        <div class="kv"><span class="k">Trust Shield</span><span id="vaTs">—</span></div>
+        <div class="kv"><span class="k">Last updated</span><span id="vaUpd">—</span></div>
+      </div>
+      <div class="cchip" style="margin-top:12px"><svg><use href="#i-shieldcheck"/></svg> This exact text is what the public sees - served verbatim, never regenerated.</div>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Close</button><button class="btn btn-pri" id="vaEditBtn"><svg><use href="#i-edit"/></svg> Edit</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mEditAnswer">
+  <div class="modal-card" style="max-width:560px">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--brand)"><use href="#i-edit"/></svg><h3>Edit Response Library entry</h3></div>
+    <div class="modal-b">
+      <div class="cchip pend" style="margin-bottom:14px"><svg><use href="#i-shieldcheck"/></svg> Editing sends the answer back to “In review” - the change goes live only once Trust Shield re-clears it.</div>
+      <div class="editor">
+        <label>Topic / option label</label>
+        <input type="text" id="eaTopic">
+        <label>Predefined answer (served verbatim to visitors)</label>
+        <textarea id="eaBody"></textarea>
+        <label>Languages</label>
+        <select id="eaLang"><option>English + Hindi + Konkani</option><option>English + Hindi</option><option>English + Konkani</option><option>English only</option></select>
+      </div>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:12px">The current live version stays served until the edit is re-cleared. The edit and re-review request are written to the audit log with your identity and timestamp.</p>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-pri" onclick="closeModal();toast('Changes saved · re-submitted to Trust Shield review')"><svg><use href="#i-shieldcheck"/></svg> Save &amp; re-submit for review</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mDelAnswer">
+  <div class="modal-card">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--danger)"><use href="#i-trash"/></svg><h3>Remove from Response Library</h3></div>
+    <div class="modal-b">
+      <div class="reqnote"><svg style="width:14px;height:14px"><use href="#i-alert"/></svg> This removes the answer from the public option flow immediately.</div>
+      <p style="font-size:13px;color:var(--ink-2)">Delete <strong id="daName">this answer</strong> from the library? Visitors will no longer be offered or served it. The deletion is recorded in the audit log; a versioned copy is retained for evidence.</p>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-danger" onclick="closeModal();toast('Answer removed from library · deletion logged')"><svg><use href="#i-trash"/></svg> Delete &amp; log</button></div>
+  </div>
+</div>
+
+<div class="modal" id="mApiKey">
+  <div class="modal-card">
+    <div class="modal-h"><svg style="width:20px;height:20px;color:var(--brand)"><use href="#i-key"/></svg><h3>Update API key</h3></div>
+    <div class="modal-b">
+      <div class="reqnote" style="color:var(--ink-2);font-weight:600"><svg style="width:14px;height:14px"><use href="#i-shieldcheck"/></svg> Key for <strong id="apiKeyName" style="margin-left:4px">provider</strong> · stored in the India-region secret vault.</div>
+      <label class="editor" style="display:block"><span style="font-size:12.5px;font-weight:600;color:var(--ink-2);display:block;margin-bottom:6px">New API key / token</span>
+        <input type="password" placeholder="Paste the new key — it is write-only and never displayed in full" style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit"></label>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:10px">The previous key is revoked on save. Rotation is written to the audit log with your identity and timestamp.</p>
+    </div>
+    <div class="modal-f"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-pri" onclick="closeModal();toast('API key updated for '+document.getElementById('apiKeyName').textContent+' · rotation logged to audit')">Save &amp; rotate</button></div>
   </div>
 </div>
 
@@ -1213,13 +1667,14 @@
     approvals:['Approvals','Final publish authorisation'],
     publishing:['Publishing','Schedule &amp; delivery'],
     instagram:['Instagram','@ria.goa channel'],
-    webchat:['Website Chat','Anonymous, session-based chat'],
+    webchat:['Website Chat','Predefined-option public assistant · Trust Shield-cleared library'],
     igcomments:['Instagram Comments','Comment moderation inbox'],
     igdms:['Instagram Direct Messages','DM moderation inbox'],
     reports:['Reports &amp; analytics','Compliance &amp; engagement'],
     jobs:['Jobs &amp; queue','Concurrent processing'],
     users:['Users &amp; roles','Access management'],
     governance:['Governance &amp; audit','Compliance control room'],
+    apis:['API management','External services &amp; keys'],
     notifications:['Notifications','Alerts &amp; governance events']
   };
   function go(id){
@@ -1247,7 +1702,7 @@
     knowledge:'admin,creator', webchat:'admin,reviewer,auditor', igcomments:'admin,reviewer,auditor',
     igdms:'admin,reviewer,auditor', review:'admin,reviewer,auditor', approvals:'admin,reviewer',
     governance:'admin,auditor', publishing:'admin', instagram:'admin,creator',
-    reports:'admin,creator,reviewer,auditor', jobs:'admin,auditor', users:'admin'
+    reports:'admin,creator,reviewer,auditor', jobs:'admin,auditor', users:'admin', apis:'admin'
   };
   function setRole(r){
     var d=ROLE_INFO[r]||ROLE_INFO.admin;
@@ -1296,6 +1751,134 @@
   var tt;
   function toast(msg){var t=document.getElementById('toast');document.getElementById('toastmsg').textContent=msg;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},2600);}
 
+  // ---- API management ----
+  function toggleApi(input,name){
+    var card=input.closest('.apicard'); var on=input.checked;
+    card.classList.toggle('off',!on);
+    var pill=card.querySelector('.apistatus');
+    if(pill){pill.className='pill '+(on?'p-ok':'p-mut')+' apistatus';pill.textContent=on?'Connected':'Disabled';}
+    toast(name+(on?' enabled':' disabled')+' · change logged to audit');
+  }
+  function revealKey(btn){
+    var span=btn.closest('.apikey').querySelector('.keymask');
+    var mask=span.getAttribute('data-mask'), full=span.getAttribute('data-full');
+    span.textContent=(span.textContent===mask)?full:mask;
+  }
+  function rotateKey(name){toast(name+' key rotated · new key active · logged to audit');}
+  function openKey(name){document.getElementById('apiKeyName').textContent=name;openModal('mApiKey');}
+
+  // ---- Response Library (predefined answers) ----
+  var LIB={
+    beaches:{topic:'Best hidden beaches in South Goa',cat:'Beaches',lang:'English + Hindi + Konkani',ver:'v3',upd:'2 days ago',status:'Cleared · live',pill:'p-ok',
+      body:"You'll love Kakolem - a bit of a scramble down, which is exactly why it stays quiet. Cola beach too, with its little lagoon. Go early, carry water, and please take your trash back with you!"},
+    disclosure:{topic:'Is Ria a real person? (AI disclosure)',cat:'About Ria',lang:'English + Hindi + Konkani',ver:'v2',upd:'5 days ago',status:'Cleared · live',pill:'p-ok',
+      body:"I'm AI-generated, created by Ethical AI Studios - I'm upfront about that. Everything I share about Goa is real though. What would you like to know?"},
+    seasonal:{topic:'Best time to visit & monsoon guide',cat:'Seasonal',lang:'English + Hindi',ver:'v4',upd:'1 day ago',status:'Cleared · live',pill:'p-ok',
+      body:"November to February is the sweet spot - warm days, cool evenings. The monsoon (June-September) turns Goa lush and green if you don't mind the rain. Pack light cottons and a rain layer."},
+    food:{topic:'Feni & food culture (heritage framing)',cat:'Food',lang:'English + Konkani',ver:'v1',upd:'3 hours ago',status:'In Trust Shield review',pill:'p-warn',
+      body:"Feni is part of Goa's cultural heritage - a traditional cashew or coconut spirit made here for generations. I share it as heritage and craft, never as a promotion. Curious about the food that goes with it?"},
+    transport:{topic:'Getting around - ferries & rentals',cat:'Transport',lang:'English + Hindi',ver:'v2',upd:'6 days ago',status:'Cleared · live',pill:'p-ok',
+      body:"The free river ferries are a lovely, slow way to cross - Ribandar and Divar are favourites. For land, scooters and cabs are easy to arrange; ride within your comfort and always wear a helmet."},
+    nightlife:{topic:'Nightlife near Anjuna',cat:'Nightlife',lang:'English',ver:'—',upd:'1 day ago',status:'Blocked · returned',pill:'p-danger',
+      body:"[Returned by Trust Shield] Draft answer referenced substances and late-night venues in a way that failed the safety and government-safe checks. Sent back to the author for a heritage/culture-first rewrite before it can re-enter review."}
+  };
+  var curAns=null;
+  function pill(id){var e=LIB[id];return '<span class="pill '+e.pill+'">'+e.status+'</span>';}
+  function viewAnswer(id){var e=LIB[id];curAns=id;
+    document.getElementById('vaTopic').textContent=e.topic;
+    document.getElementById('vaBody').textContent=e.body;
+    document.getElementById('vaCat').textContent=e.cat;
+    document.getElementById('vaLang').textContent=e.lang;
+    document.getElementById('vaVer').textContent=e.ver;
+    document.getElementById('vaUpd').textContent=e.upd;
+    document.getElementById('vaTs').innerHTML=pill(id);
+    var st=document.getElementById('vaStatus');st.className='pill '+e.pill;st.textContent=e.status;st.style.marginLeft='auto';
+    document.getElementById('vaEditBtn').onclick=function(){editAnswer(id);};
+    openModal('mViewAnswer');
+  }
+  function editAnswer(id){var e=LIB[id];curAns=id;closeModal();
+    document.getElementById('eaTopic').value=e.topic;
+    document.getElementById('eaBody').value=e.body;
+    var sel=document.getElementById('eaLang');
+    for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===e.lang){sel.selectedIndex=i;break;}}
+    openModal('mEditAnswer');
+  }
+  function askDelAnswer(id){var e=LIB[id];curAns=id;
+    document.getElementById('daName').textContent='“'+e.topic+'”';
+    openModal('mDelAnswer');
+  }
+
+  // ---- Website chat live simulation (public predefined-option flow) ----
+  var CP_NODES={
+    start:{who:'Ria',
+      msg:"Hi! I'm Ria, your AI guide to Goa - and yes, I'm AI-generated, I'm upfront about that. What would you like to explore? Pick a topic below, or type your own question.",
+      chips:[['Hidden beaches','beaches'],['Best time to visit','seasonal'],['Food & feni','food'],['Getting around','transport'],['Is Ria real?','disclosure']]},
+    beaches:{lib:'beaches',chips:[['More South Goa spots','beaches2'],['Best time to visit','seasonal'],['Talk to a person','handoff']]},
+    beaches2:{who:'Ria · from library',
+      msg:"Palolem is the lively one, but slip next door to Patnem for calm. Butterfly Beach is a short boat hop - go with a local boatman and agree the fare first.",
+      chips:[['Best time to visit','seasonal'],['Getting around','transport'],['Talk to a person','handoff']]},
+    seasonal:{lib:'seasonal',chips:[['Getting around','transport'],['Food & feni','food'],['Talk to a person','handoff']]},
+    transport:{lib:'transport',chips:[['Best time to visit','seasonal'],['Talk to a person','handoff']]},
+    disclosure:{lib:'disclosure',chips:[['Hidden beaches','beaches'],['Best time to visit','seasonal']]},
+    food:{who:'Ria',gate:true,
+      msg:"That one's still in Trust Shield review, so I'm not sharing it yet - I only serve answers that have been approved. Meanwhile, want hidden beaches or the best time to visit?",
+      note:'Compliance gate: “Feni & food culture” is In review - it is not served to the public until Trust Shield clears it.',
+      chips:[['Hidden beaches','beaches'],['Best time to visit','seasonal']]},
+    handoff:{who:'Ria',
+      msg:"Of course - I'll hand you to a human host. Leave your question and an email and our Goa team will get back to you. Anything sensitive or booking-related always goes to a person, not me.",
+      note:'Routed to human hand-off - logged for the operations team.',
+      chips:[['Start over','start']]},
+    fallback:{who:'Ria',
+      msg:"I can only share pre-approved answers from my library, so I don't have that one yet. Here's what I can help with right now:",
+      note:'No live answer generated - query matched against the library, no cleared answer found, safe fallback shown.',
+      chips:[['Hidden beaches','beaches'],['Best time to visit','seasonal'],['Getting around','transport'],['Is Ria real?','disclosure'],['Talk to a person','handoff']]},
+    safety:{who:'Static safety message · no AI reply',danger:true,
+      msg:"It sounds like you're carrying a lot right now, and you deserve support. Please reach out to iCall India: 9152987821. You don't have to go through this alone.",
+      note:'Crisis signal detected - AI reply blocked, fixed safety message shown. Ria never attempts counselling.',
+      chips:[['Start over','start']]}
+  };
+  var CP_MATCH=[
+    [['beach','sand','cove','kakolem','palolem','patnem','anjuna','coast'],'beaches'],
+    [['when','time','season','monsoon','weather','month','visit'],'seasonal'],
+    [['feni','food','eat','cuisine','drink','restaurant','dish'],'food'],
+    [['ferry','transport','scooter','bike','taxi','cab','rent','get around','drive'],'transport'],
+    [['talk to','human','agent','someone','representative','contact a'],'handoff'],
+    [['real','a.i','ai ','are you a','bot','fake','robot'],'disclosure']
+  ];
+  var CP_CRISIS=['hurt myself','kill myself','suicide','end it','end my life','no point','don\'t want to live','do not want to live','worthless','self harm','self-harm'];
+  var cpBusy=false;
+  function cpEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function cpScroll(){var b=document.getElementById('cpBody');if(b)b.scrollTop=b.scrollHeight;}
+  function cpUser(text){var b=document.getElementById('cpBody');var d=document.createElement('div');d.className='bubble u';d.style.maxWidth='78%';d.textContent=text;b.appendChild(d);cpScroll();}
+  function cpBot(node){var b=document.getElementById('cpBody');
+    var msg=node.lib?LIB[node.lib].body:node.msg;
+    var who=node.who||(node.lib?'Ria · from library':'Ria');
+    var d=document.createElement('div');d.className='bubble a';
+    d.style.alignSelf='flex-start';d.style.maxWidth='92%';d.style.borderBottomLeftRadius='3px';d.style.borderBottomRightRadius='12px';
+    if(node.danger){d.style.background='var(--danger-l)';d.style.borderColor='#E7C4C0';}
+    d.innerHTML='<div class="who">'+cpEsc(who)+'</div>'+cpEsc(msg);
+    b.appendChild(d);
+    if(node.note){var n=document.createElement('div');n.className='cp-note'+(node.gate?' gate':'');n.innerHTML='<svg><use href="#i-shieldcheck"/></svg>'+cpEsc(node.note);b.appendChild(n);}
+    if(node.chips&&node.chips.length){var c=document.createElement('div');c.className='optchips';
+      node.chips.forEach(function(ch){var s=document.createElement('span');s.className='optchip';s.textContent=ch[0];s.onclick=function(){cpPick(ch[0],ch[1]);};c.appendChild(s);});
+      b.appendChild(c);}
+    cpScroll();
+  }
+  function cpTyping(on){var b=document.getElementById('cpBody');var t=document.getElementById('cpTyping');
+    if(on){if(t)return;var d=document.createElement('div');d.className='cp-typing';d.id='cpTyping';d.innerHTML='<i></i><i></i><i></i>';b.appendChild(d);cpScroll();}
+    else if(t){t.parentNode.removeChild(t);}
+  }
+  function cpGo(key){cpBusy=true;cpTyping(true);setTimeout(function(){cpTyping(false);cpBot(CP_NODES[key]||CP_NODES.fallback);cpBusy=false;},650);}
+  function cpPick(label,to){if(cpBusy)return;cpUser(label);cpGo(to);}
+  function cpRoute(text){var low=' '+text.toLowerCase()+' ';
+    for(var i=0;i<CP_CRISIS.length;i++){if(low.indexOf(CP_CRISIS[i])>=0)return 'safety';}
+    for(var j=0;j<CP_MATCH.length;j++){var kws=CP_MATCH[j][0];for(var k=0;k<kws.length;k++){if(low.indexOf(kws[k])>=0)return CP_MATCH[j][1];}}
+    return 'fallback';
+  }
+  function cpSend(){if(cpBusy)return;var inp=document.getElementById('cpText');var v=(inp.value||'').trim();if(!v)return;inp.value='';cpUser(v);cpGo(cpRoute(v));}
+  function cpReset(){var b=document.getElementById('cpBody');if(!b)return;b.innerHTML='';cpBusy=false;cpBot(CP_NODES.start);}
+  cpReset();
+
   // ---- Review detail data ----
   var flag='<span class="vi" style="background:var(--flag)"></span>', ok='<span class="vi" style="background:var(--ok)"></span>', crit='<span class="vi" style="background:var(--danger)"></span>';
   function vr(name,state){var cls=state==='flag'?'vrow flag':'vrow';var st=state==='flag'?'<span class="vst" style="color:var(--flag)">Flagged</span>':state==='crit'?'<span class="vst" style="color:var(--danger)">Blocked</span>':'<span class="vst" style="color:var(--ok)">Clear</span>';var dot=state==='flag'?flag:state==='crit'?crit:ok;return '<div class="'+cls+'">'+dot+name+st+'</div>';}
@@ -1315,21 +1898,16 @@
       prism:vr('Drug facilitation (safety)','crit')+vr('Prohibited content','crit')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Zero-tolerance guardrail · reply suppressed automatically.</p>',
       meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--danger);font-weight:700">9.2 / 10</span></div><div class="kv"><span class="k">Decision</span><span>Blocked · no reply</span></div><div class="kv"><span class="k">Logged</span><span style="color:var(--ok);font-weight:600">Audit ✓</span></div>',
       actions:'<button class="btn btn-ok" onclick="toast(\'Confirmed · kept suppressed\')"><svg><use href="#i-check"/></svg> Confirm suppression</button><button class="btn">Hide comment</button>'},
-    politics:{title:'Political question - held for review',chan:'<span class="chan"><svg><use href="#i-globe"/></svg>Website chat</span>',kind:'Escalated conversation',
-      convo:'<div class="bubble u"><div class="who">Website visitor</div>what does Ria think of the new state tourism policy?</div><div class="bubble a" style="background:var(--warn-l);border-color:#EAD9AF"><div class="who">Ria · draft (held)</div>I\'m here for the fun stuff - beaches, food, hidden corners. I steer clear of politics! Want a hidden-Goa tip instead?</div>',
+    politics:{title:'Political question - held for review',chan:'<span class="chan"><svg><use href="#i-cam"/></svg>IG Comment</span>',kind:'Escalated conversation',
+      convo:'<div class="bubble u"><div class="who">@rahul.travels · on "Ribandar sunrise"</div>what\'s your take on the new state tourism policy?</div><div class="bubble a" style="background:var(--warn-l);border-color:#EAD9AF"><div class="who">Ria · draft (held)</div>I\'m here for the fun stuff - beaches, food, hidden corners. I steer clear of politics! Want a hidden-Goa tip instead?</div>',
       prism:vr('Political affiliation','flag')+vr('Region / geography','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 8.4 · deflection drafted but held for reviewer to confirm it stays neutral &amp; government-safe.</p>',
       meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--warn);font-weight:700">8.4 / 10</span></div><div class="kv"><span class="k">Status</span><span>Awaiting reviewer</span></div><div class="kv"><span class="k">Boundary</span><span>No political content</span></div>',
       actions:'<button class="btn btn-ok" onclick="toast(\'Approved reply · delivered\')"><svg><use href="#i-check"/></svg> Approve reply</button><button class="btn"><svg><use href="#i-edit"/></svg> Edit reply</button><button class="btn btn-danger" onclick="openModal(\'mReject\')">Reject</button>'},
     ok:{title:'Monsoon mornings in Divar Island',chan:'<span class="chan"><svg><use href="#i-doc"/></svg>Generated carousel</span>',kind:'Content under review',
       convo:'<div class="preview-media" style="background:linear-gradient(135deg,#3E7C46,#79A85A);aspect-ratio:16/9"><svg class="scene"><use href="#sc-river"/></svg><span class="aibadge" style="position:absolute;top:8px;left:8px">AI-Generated</span><span class="wm aibadge">◈ SGI</span></div><p style="margin-top:12px;font-size:13.5px;color:var(--ink-2)">Caption: “Divar in the rains - paddy fields impossibly green, the ferry gliding through the mist…”</p>',
       prism:vr('All 22 verticals','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Cleared - no flags. Still requires human approval before publish.</p>',
-      meta:'<div class="kv"><span class="k">SGI watermark</span><span style="color:var(--ok);font-weight:600">Embedded ✓</span></div><div class="kv"><span class="k">Provenance (C2PA)</span><span style="color:var(--ok);font-weight:600">Intact ✓</span></div><div class="kv"><span class="k">PRISM</span><span style="color:var(--ok);font-weight:600">0 flags ✓</span></div>',
+      meta:'<div class="kv"><span class="k">SGI watermark</span><span style="color:var(--ok);font-weight:600">Embedded ✓</span></div><div class="kv"><span class="k">Provenance (C2PA)</span><span style="color:var(--ok);font-weight:600">Intact ✓</span></div><div class="kv"><span class="k">Trust Shield</span><span style="color:var(--ok);font-weight:600">0 flags ✓</span></div>',
       actions:'<button class="btn btn-ok" onclick="toast(\'Approved · sent to admin approval\')"><svg><use href="#i-check"/></svg> Approve</button><button class="btn"><svg><use href="#i-edit"/></svg> Edit</button><button class="btn btn-danger" onclick="openModal(\'mReject\')">Reject</button>'},
-    ok2:{title:'Best hidden beaches in South Goa?',chan:'<span class="chan"><svg><use href="#i-globe"/></svg>Website chat</span>',kind:'Autonomous conversation',
-      convo:'<div class="bubble u"><div class="who">Website visitor</div>Best hidden beaches in South Goa?</div><div class="bubble a"><div class="who">Ria</div>Oh, you\'ll love Kakolem - it\'s a bit of a scramble down but that\'s exactly why it stays quiet. Cola beach too, with its little lagoon. Go early, carry water, and please take your trash back out with you!</div>',
-      prism:vr('All 22 verticals','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 2.0 · cleared · answered autonomously, knowledge-grounded.</p>',
-      meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--ok);font-weight:700">2.0 / 10</span></div><div class="kv"><span class="k">Decision</span><span>Autonomous reply</span></div><div class="kv"><span class="k">Grounded in</span><span>“Hidden beaches” v4</span></div>',
-      actions:'<button class="btn" onclick="go(\'conversations\')">Back to log</button>'},
     c_beach:{title:'Comment reply - quiet beaches',chan:'<span class="chan"><svg><use href="#i-cam"/></svg>IG Comment</span>',kind:'Autonomous comment reply',
       convo:'<div class="bubble u"><div class="who">@sunny_traveller · on "Ribandar sunrise"</div>Which beach is quietest in December?</div><div class="bubble a"><div class="who">Ria · auto-reply (posted)</div>December is lovely for it - try Kakolem or Cola if you want quiet. Go early, and please carry your trash back out with you!</div>',
       prism:vr('All 22 verticals','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 2.1 · cleared · reply posted automatically.</p>',
@@ -1345,16 +1923,6 @@
       prism:vr('All 22 verticals','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 1.8 · cleared · reply posted automatically.</p>',
       meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--ok);font-weight:700">1.8 / 10</span></div><div class="kv"><span class="k">Decision</span><span>Auto reply (posted)</span></div><div class="kv"><span class="k">On post</span><span>Divar monsoon</span></div>',
       actions:'<button class="btn" onclick="toast(\'Opening on Instagram (demo)\')">View on Instagram</button>'},
-    w_ai:{title:'Website chat - AI disclosure',chan:'<span class="chan"><svg><use href="#i-globe"/></svg>Website Chat</span>',kind:'Autonomous website reply',
-      convo:'<div class="bubble u"><div class="who">Website visitor · #C3D4</div>Is Ria a real person?</div><div class="bubble a"><div class="who">Ria · auto-reply</div>I am AI-generated, created by Ethical AI Studios - I am upfront about that. Everything I share about Goa is real though. What would you like to know?</div>',
-      prism:vr('All 22 verticals','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 3.1 · cleared · AI disclosed and reply sent automatically.</p>',
-      meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--ok);font-weight:700">3.1 / 10</span></div><div class="kv"><span class="k">Decision</span><span>AI reply sent</span></div><div class="kv"><span class="k">AI disclosure</span><span style="color:var(--ok);font-weight:600">Disclosed ✓</span></div>',
-      actions:'<button class="btn" onclick="go(\'webchat\')"><svg><use href="#i-back"/></svg> Back to Website Chat</button>'},
-    w_crisis:{title:'Website chat - safety message shown',chan:'<span class="chan"><svg><use href="#i-globe"/></svg>Website Chat</span>',kind:'Crisis - static safety response',
-      convo:'<div class="bubble u"><div class="who">Website visitor · #E5F6</div>honestly I don\'t see the point in anything anymore</div><div class="bubble a" style="background:var(--danger-l);border-color:#E7C4C0"><div class="who">Static safety message · no AI reply</div>It sounds like you are carrying a lot right now, and you deserve support. Please reach out to iCall India: <strong>9152987821</strong>. You do not have to go through this alone.<div style="margin-top:10px"><button class="btn btn-sm" disabled style="opacity:.65">Start a new chat</button></div></div>',
-      prism:vr('Crisis / self-harm signal','crit')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 9.6 · AI reply blocked · a fixed safety message with the iCall India helpline is shown. The "Start a new chat" button lets the visitor begin a fresh session.</p>',
-      meta:'<div class="kv"><span class="k">Intent score</span><span style="color:var(--danger);font-weight:700">9.6 / 10</span></div><div class="kv"><span class="k">Response</span><span>Static safety message</span></div><div class="kv"><span class="k">Helpline</span><span class="mono">iCall · 9152987821</span></div><div class="kv"><span class="k">Session</span><span>Ends · new chat resets context</span></div>',
-      actions:'<button class="btn" onclick="go(\'webchat\')"><svg><use href="#i-back"/></svg> Back to Website Chat</button>'},
     c_religion:{title:'Comment - held for review',chan:'<span class="chan"><svg><use href="#i-cam"/></svg>IG Comment</span>',kind:'Held for human review',
       convo:'<div class="bubble u"><div class="who">@meera_g · on "Fontainhas heritage walk"</div>isn\'t showing the old church like this a bit disrespectful?</div><div class="bubble a" style="background:var(--warn-l);border-color:#EAD9AF"><div class="who">Ria · draft reply (held)</div>Not at all - I share Goa\'s churches, temples and mosques with the same warmth and respect. Thanks for caring about how it is shown!</div>',
       prism:vr('Religion','flag')+vr('Region / geography','ok')+'<p style="font-size:12px;color:var(--muted);margin-top:4px">Intent 8.3 · religion-sensitive · drafted reply held for a reviewer before it posts.</p>',
@@ -1394,7 +1962,7 @@
     document.getElementById('ptitle').innerHTML='Review<small>'+d.kind+'</small>';
   }
 
-  // build 22 PRISM verticals
+  // build 22 Trust Shield verticals
   var VERTS=['Gender','Caste','Religion','Region / Geography','Age','Disability','Skin tone / Colorism','Ethnicity','Language','Socioeconomic','Body type','Sexual orientation','Gender expression','Marital status','Dietary preference','Political affiliation','Nationality','Tribal / Indigenous','Migrant status','Education','Urban / Rural','Occupation / Class'];
   document.getElementById('verts').innerHTML=VERTS.map(function(v,i){return '<div class="vert act"><span class="vi" style="background:var(--ok);width:8px;height:8px;border-radius:50%"></span>'+v+'<span class="n">'+(i+1)+'</span></div>'}).join('');
 </script>
